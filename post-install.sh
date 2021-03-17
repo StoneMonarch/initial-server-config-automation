@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "This install script is meant for Stone Monarch and will cause you to loose access"
 echo "to your server if you are not them."
 echo ""
@@ -10,6 +11,9 @@ select yn in "Yes" "No"; do
         No ) exit;;
     esac
 done
+
+echo "Setting time so to EST"
+timedatectl set-timezone America/Toronto
 
 echo "Install XCP-ng Tools? (This requires user input)"
 select yn in "Yes" "No"; do
