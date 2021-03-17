@@ -1,0 +1,18 @@
+Include /etc/ssh/sshd_config.d/*.conf
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+PermitRootLogin no
+AuthenticationMethods publickey
+PubkeyAuthentication yes
+AllowUsers stone-monarch
+HostbasedAuthentication no
+IgnoreRhosts yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM no
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem sftp	/usr/lib/openssh/sftp-server
+PasswordAuthentication no
