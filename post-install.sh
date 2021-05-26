@@ -2,7 +2,7 @@
 
 echo "This install script is meant for Stone Monarch and will cause you to loose access"
 echo "to your server if you are not them."
-echo "DO REMEBER TO LOOK FOR YOUR 2FA QR CODE"
+echo ""
 echo ""
 echo ""
 echo "Do you wish to continue?"
@@ -38,14 +38,15 @@ echo "Setting auto updates for all"
 mv /etc/apt/apt.conf.d/50unattended-upgrades /etc/apt/apt.conf.d/upgrades.bak
 cp 50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
 
+echo "Setting up PAM for 2FA"
+mv /etc/pam.d/sshd /etc/pam.d/sshd.bak
+cp sshd /etc/pam.d/sshd
+
 echo "Updating apt for sanity"
 apt update
 apt upgrade -y
 
-echo "Reboot now?"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) shutdown -r now;;
-        No ) exit;;
-    esac
-done
+echo "Setup 2FA"
+google-authenticator
+
+echo "You should reboot now"
