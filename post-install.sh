@@ -46,7 +46,4 @@ echo "Updating apt for sanity"
 apt update
 apt upgrade -y
 
-echo "Setup 2FA"
-google-authenticator
-
-echo "You should reboot now"
+echo "Please run 'google-authenticator' and reboot after"
