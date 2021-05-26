@@ -27,7 +27,7 @@ done
 echo "Updating apt"
 apt update
 apt upgrade -y
-apt install -y mosh apt-listchanges bsd-mailx libpam-google-authenticator
+apt install -y mosh apt-listchanges
 
 echo "Config sshd"
 # mv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
@@ -38,12 +38,8 @@ echo "Setting auto updates for all"
 # mv /etc/apt/apt.conf.d/50unattended-upgrades /etc/apt/apt.conf.d/upgrades.bak
 cp 50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
 
-echo "Setting up PAM for 2FA"
-# mv /etc/pam.d/sshd /etc/pam.d/sshd.bak
-cp sshd /etc/pam.d/sshd
-
 echo "Updating apt for sanity"
 apt update
 apt upgrade -y
 
-echo "Please run 'google-authenticator' and reboot after"
+echo "Please Reboot"

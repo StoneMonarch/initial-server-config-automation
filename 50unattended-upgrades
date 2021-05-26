@@ -18,6 +18,4 @@ Unattended-Upgrade::Remove-Unused-Dependencies "true";
 
 Unattended-Upgrade::Automatic-Reboot "true";
 
-Unattended-Upgrade::Mail "joshleubecherrobinson@gmail.com";
-
 Unattended-Upgrade::Automatic-Reboot-Time "03:00";
