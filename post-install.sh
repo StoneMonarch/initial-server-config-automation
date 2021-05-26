@@ -2,6 +2,7 @@
 
 echo "This install script is meant for Stone Monarch and will cause you to loose access"
 echo "to your server if you are not them."
+echo "DO REMEBER TO LOOK FOR YOUR 2FA QR CODE"
 echo ""
 echo ""
 echo "Do you wish to continue?"
@@ -26,6 +27,7 @@ done
 echo "Updating apt"
 apt update
 apt upgrade -y
+apt install -y mosh apt-listchanges bsd-mailx libpam-google-authenticator
 
 echo "Config sshd"
 mv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak

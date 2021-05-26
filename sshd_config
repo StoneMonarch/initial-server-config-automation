@@ -3,14 +3,14 @@ HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 PermitRootLogin no
-AuthenticationMethods publickey
+AuthenticationMethods publickey,password publickey,keyboard-interactive
 PubkeyAuthentication yes
 AllowUsers stone-monarch
 HostbasedAuthentication no
 IgnoreRhosts yes
 PermitEmptyPasswords no
-ChallengeResponseAuthentication no
-UsePAM no
+ChallengeResponseAuthentication yes
+UsePAM yes
 X11Forwarding yes
 PrintMotd no
 AcceptEnv LANG LC_*
