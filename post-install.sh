@@ -26,7 +26,8 @@ done
 
 echo "Updating apt"
 apt update
-apt upgrade -y
+apt full-upgrade -y
+apt dist-upgrade -y
 apt install -y mosh apt-listchanges
 
 echo "Config sshd"
