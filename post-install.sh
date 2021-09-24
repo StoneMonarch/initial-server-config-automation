@@ -32,12 +32,12 @@ apt install -y mosh apt-listchanges
 
 echo "Config sshd"
 # mv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-cp sshd_config /etc/ssh/sshd_config
+cp sshd/sshd_config /etc/ssh/sshd_config
 sshd -t
 
 echo "Setting auto updates for all"
 # mv /etc/apt/apt.conf.d/50unattended-upgrades /etc/apt/apt.conf.d/upgrades.bak
-cp 50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
+cp upgrades/50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
 
 echo "Updating apt for sanity"
 apt update
