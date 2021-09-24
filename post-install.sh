@@ -28,7 +28,7 @@ echo "Updating apt"
 apt update
 apt full-upgrade -y
 apt dist-upgrade -y
-apt install -y mosh apt-listchanges
+apt install -y apt-listchanges
 
 echo "Config sshd"
 # mv /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
