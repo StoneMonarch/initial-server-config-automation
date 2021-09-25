@@ -43,4 +43,5 @@ echo "Updating apt for sanity"
 apt update
 apt upgrade -y
 
-echo "Please Reboot"
+echo "Rebooting"
+shutdown -r now && exit
