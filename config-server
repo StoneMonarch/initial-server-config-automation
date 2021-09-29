@@ -8,7 +8,7 @@ releases = ["ubuntu", "fedora"]
 
 
 def setup_ubuntu():
-    
+
     print("Updating and upgrading")
     os.system("apt update && apt full-upgrade -y && apt dist-upgrade -y")
 
@@ -31,7 +31,7 @@ def setup_ubuntu():
 def setup_fedora():
 
     print("Updating and upgrading")
-    os.system("dnf update -y dnf upgrade -y")
+    os.system("dnf update -y && dnf upgrade -y")
 
     print("Installing 'dnf-automatic', 'xe-guest-utilities-latest', and 'vim'")
     os.system("dnf install -y dnf-automatic xe-guest-utilities-latest vim")
@@ -45,8 +45,8 @@ def setup_fedora():
     print("Setting auto updates")
     os.system("cp auto-updates/fedora /etc/dnf/automatic.conf")
 
-    print("APT again for sanity")
-    os.system("dnf update -y dnf upgrade -y")
+    print("DNF again for sanity")
+    os.system("dnf update -y && dnf upgrade -y")
 
     print("Rebooting")
     os.system("shutdown -r now")
