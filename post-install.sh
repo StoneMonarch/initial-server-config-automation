@@ -37,7 +37,7 @@ sshd -t
 
 echo "Setting auto updates for all"
 # mv /etc/apt/apt.conf.d/50unattended-upgrades /etc/apt/apt.conf.d/upgrades.bak
-cp upgrades/50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
+cp auto-updates/50unattended-upgrades-ubuntu /etc/apt/apt.conf.d/50unattended-upgrades
 
 echo "Updating apt for sanity"
 apt update
