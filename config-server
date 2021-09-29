@@ -1,0 +1,89 @@
+#!/usr/bin/python3
+import argparse
+import csv
+import os
+
+version = "0.1-alpha"
+releases = ["ubuntu", "fedora"]
+
+
+def setup_ubuntu():
+    
+    print("Updating and upgrading")
+    os.system("apt update && apt full-upgrade -y && apt dist-upgrade -y")
+
+    print("Installing 'apt-listchanges', and 'xe-guest-utilities'")
+    os.system("apt install -y apt-listchanges xe-guest-utilities")
+
+    print("Copy sshd_config")
+    os.system("cp sshd/sshd_config /etc/ssh/sshd_config && sshd -t")
+
+    print("Setting auto updates")
+    os.system("cp auto-updates/ubuntu /etc/apt/apt.conf.d/50unattended-upgrades")
+
+    print("APT again for sanity")
+    os.system("apt update && apt upgrade -y")
+
+    print("Rebooting")
+    os.system("shutdown -r now")
+
+
+def setup_fedora():
+
+    print("Updating and upgrading")
+    os.system("dnf update -y dnf upgrade -y")
+
+    print("Installing 'dnf-automatic', 'xe-guest-utilities-latest', and 'vim'")
+    os.system("dnf install -y dnf-automatic xe-guest-utilities-latest vim")
+
+    print("Enabling/Starting xe-guest-utilities")
+    os.system("systemctl enable xe-linux-distribution && systemctl start xe-linux-distribution")
+
+    print("Copy sshd_config")
+    os.system("cp sshd/sshd_config /etc/ssh/sshd_config && sshd -t")
+
+    print("Setting auto updates")
+    os.system("cp auto-updates/fedora /etc/dnf/automatic.conf")
+
+    print("APT again for sanity")
+    os.system("dnf update -y dnf upgrade -y")
+
+    print("Rebooting")
+    os.system("shutdown -r now")
+
+
+def set_release(release_arg):
+
+    if release_arg != "auto" and release_arg in releases:
+        return release_arg
+
+    with open("/etc/os-release") as f:
+        reader = csv.reader(f, delimiter="=")
+        for row in reader:
+            if row[0] == "ID" and row[1] in releases:
+                return row[1]
+    raise ValueError(f"Distro not in {releases}")
+
+
+def main(args):
+
+    release = set_release(args.release)
+    
+    if release == "ubuntu":
+        setup_ubuntu()
+    elif release == "fedora":
+        setup_fedora()
+    else:
+        raise ValueError(f"Release not in {releases}")
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser( prog="config-server", description='Auto configuration tool for initial server administration.')
+    
+    parser.add_argument('--version', action="version", version=f'%(prog)s {version}')
+    parser.add_argument('-r', '--release', default="auto", choices=releases, help="Specify your release if for some reason 'auto' errors out.")
+    
+    args = parser.parse_args()
+
+    main(args)
